@@ -29,13 +29,7 @@ def main():
         'amazon': 'AMZN',
     }
     df = get_data(days, tickers)
-    companies = st.multiselect('会社選択', list(df.index), [
-        'apple',
-        'google',
-        'microsoft',
-        'netflix',
-        'amazon',
-        ])
+    companies = st.multiselect('会社選択', list(df.index), tickers.keys())
     if not companies:
         st.error('会社選択してください')
     else:
