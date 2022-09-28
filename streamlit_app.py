@@ -55,5 +55,5 @@ try:
             )
         )
         st.altair_chart(chart, use_container_width=True)
-except:
-    st.error('エラー')
+except Exception as e:
+    st.error(e)
