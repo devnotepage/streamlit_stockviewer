@@ -1,1 +1,5 @@
+matplotlib.pyplot
+pandas
+yfinance
+altair
 streamlit
