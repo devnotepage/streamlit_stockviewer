@@ -17,10 +17,10 @@ def get_data(days, tickers):
         df = pd.concat([df, hist])
     return df
 
-try:
+def main():
     st.title('株価表示')
-    days = st.sidebar.slider('日数', 1, 100, 50)
-    ymin, ymax = st.sidebar.slider('株価範囲', 0.0, 3500.0, (0.0, 3500.0))
+    days = st.sidebar.slider('日数範囲', 1, 100, 50)
+    ymin, ymax = st.sidebar.slider('株価範囲', 0.0, 3500.0, (0.0, 500.0))
     tickers = {
         'apple': 'AAPL',
         'google': 'GOOGL',
@@ -55,5 +55,9 @@ try:
             )
         )
         st.altair_chart(chart, use_container_width=True)
-except Exception as e:
-    st.error(e)
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as e:
+        st.error(e)
