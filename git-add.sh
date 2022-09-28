@@ -1,3 +1,2 @@
 git add .
-
-read -p "Complete!"
+git status
