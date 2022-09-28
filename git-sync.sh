@@ -1,7 +1,8 @@
-git add .
+git status
 printf "\n"
 
-git commit -m'update'
+
+git commit -a -m'update'
 printf "\n"
 
 git pull -v --progress "origin"
