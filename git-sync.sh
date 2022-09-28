@@ -1,7 +1,6 @@
 git status
 printf "\n"
 
-
 git commit -a -m'update'
 printf "\n"
 
