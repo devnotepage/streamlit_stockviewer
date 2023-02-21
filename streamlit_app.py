@@ -2,6 +2,8 @@ import pandas as pd
 import yfinance as yf
 import altair as alt
 import streamlit as st
+import tempfile
+from pathlib import Path
 
 @st.cache
 def get_data(days, tickers):
@@ -21,6 +23,19 @@ def main():
     st.title('株価表示')
     days = st.sidebar.slider('日数範囲', 1, 100, 50)
     ymin, ymax = st.sidebar.slider('株価範囲', 0.0, 3500.0, (0.0, 500.0))
+
+    # upload file
+    uploaded_file = st.file_uploader("Choose your .csv file", type="csv")
+    if uploaded_file is not None:
+        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+            st.markdown("## Original CSV file")
+            fp = Path(tmp_file.name)
+            fp.write_bytes(uploaded_file.getvalue())
+            df = pd.read_csv(fp, delimiter='\t', encoding='utf-8')
+            st.dataframe(df)
+
+
+
     tickers = {
         'apple': 'AAPL',
         'google': 'GOOGL',
@@ -28,6 +43,9 @@ def main():
         'netflix': 'NFLX',
         'amazon': 'AMZN',
     }
+
+
+
     df = get_data(days, tickers)
     companies = st.multiselect('会社選択', list(df.index), tickers.keys())
     if not companies:
